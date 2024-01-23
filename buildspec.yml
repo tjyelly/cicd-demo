@@ -1,0 +1,30 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11 # Modify as needed for your Java version
+    commands:
+      - echo Installing source dependencies...
+
+  pre_build:
+    commands:
+      - echo Pre-build steps...
+      - echo Compiling the source code...
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn package # Assuming a Maven project; modify for your build tool
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Copying artifacts...
+      - cp -r target/*.jar build/ # Replace with your specific artifacts
+
+artifacts:
+  files:
+    - target/*.jar # Replace with your specific artifacts
+    - appspec.yml
+    - aws/scripts/* # Including the scripts referenced in appspec.yml
